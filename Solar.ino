@@ -22,8 +22,8 @@ boolean connectWifi();
 //on/off callbacks
 void solarOn();
 void solarOff();
-void bedOn();
-void bedOff();
+void sickOn();
+void sickOff();
 void lightThreeOn();
 void lightThreeOff();
 void lightFourOn();
@@ -46,7 +46,7 @@ boolean wifiConnected = false;
 UpnpBroadcastResponder upnpBroadcastResponder;
 
 Switch *solar = NULL;
-Switch *bed = NULL;
+Switch *sick = NULL;
 Switch *lightThree = NULL;
 Switch *lightFour = NULL;
 Switch *outletOne = NULL;
@@ -79,8 +79,8 @@ void setup()
     // Define your switches here. Max 14
     // Format: Alexa invocation name, local port no, on callback, off callback
     solar = new Switch("solar", 80, solarOn, solarOff);
-    bed = new Switch("bed", 81, bedOn, bedOff);
-    lightThree = new Switch("Light Three", 82, lightThreeOn, lightThreeOff);
+    sick = new Switch("sick", 81, sickOn, sickOff);
+    lightThree = new Switch("light Three", 82, lightFourOn, lightFourOff);
     lightFour = new Switch("Light Four", 83, lightFourOn, lightFourOff);
     outletOne = new Switch("Outlet One", 84,outletOneOn, outletOneOff);
     outletTwo = new Switch("Outlet Two", 85, outletTwoOn, outletTwoOff);
@@ -89,8 +89,8 @@ void setup()
 
     Serial.println("Adding switches upnp broadcast responder");
     upnpBroadcastResponder.addDevice(*solar);
-    upnpBroadcastResponder.addDevice(*bed);
-    upnpBroadcastResponder.addDevice(*lightThree);
+    upnpBroadcastResponder.addDevice(*sick);
+    upnpBroadcastResponder.addDevice(*lightFour);
     upnpBroadcastResponder.addDevice(*lightFour);
     upnpBroadcastResponder.addDevice(*outletOne);
     upnpBroadcastResponder.addDevice(*outletTwo);
@@ -108,12 +108,12 @@ void setup()
     pinMode (15, OUTPUT);
     digitalWrite (5,HIGH);
     digitalWrite (4,HIGH);
-    digitalWrite (0,LOW);
-    digitalWrite (2,LOW);
-    digitalWrite (14,LOW);
-    digitalWrite (12,LOW);
-    digitalWrite (13,LOW);
-    digitalWrite (15,LOW);
+    digitalWrite (0,HIGH);
+    digitalWrite (2,HIGH);
+    digitalWrite (14,HIGH);
+    digitalWrite (12,HIGH);
+    digitalWrite (13,HIGH);
+    digitalWrite (15,HIGH);
   }
 }
 
@@ -123,8 +123,8 @@ void loop()
       upnpBroadcastResponder.serverLoop();
 
       solar->serverLoop();
-      bed->serverLoop();
-      lightThree->serverLoop();
+      sick->serverLoop();
+      lightFour->serverLoop();
       lightFour->serverLoop();
       outletOne->serverLoop();
       outletTwo->serverLoop();
@@ -143,12 +143,12 @@ void solarOn() {
     digitalWrite(relayOne, LOW);   // sets relayOne on
 }
 
-void bedOff() {
+void sickOff() {
     Serial.print("Switch 2 turn off ...");
     digitalWrite(relayTwo, HIGH);   // sets relayOne off
 }
 
-void bedOn() {
+void sickOn() {
   Serial.print("Switch 2 turn on ...");
   digitalWrite(relayTwo, LOW);   // sets relayOne on
 }
