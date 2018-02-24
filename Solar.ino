@@ -128,7 +128,7 @@ void loop()
       hardDrive->serverLoop();
       meter->serverLoop();
       outletTwo->serverLoop();
-      //outletThree->serverLoop();
+      outletThree->serverLoop();
       outletFour->serverLoop();
    }
 }
@@ -145,13 +145,13 @@ void solarOn() {
 
 void sickOff() {
     Serial.print("Switch 2 turn off ...");
-    digitalWrite(relayTwo, LOW);
-    delay(3000);
     digitalWrite(relayTwo, HIGH);   // sets relayOne off
 }
 
 void sickOn() {
   Serial.print("Switch 2 turn on ...");
+  digitalWrite(relayTwo, HIGH);
+  delay(3000);
   digitalWrite(relayTwo, LOW);   // sets relayOne on
 }
 
