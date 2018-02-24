@@ -24,12 +24,12 @@ void solarOn();
 void solarOff();
 void sickOn();
 void sickOff();
-void lightThreeOn();
-void lightThreeOff();
-void lightFourOn();
-void lightFourOff();
-void outletOneOn();
-void outletOneOff();
+void lightOn();
+void lightOff();
+void hardDriveOn();
+void hardDriveOff();
+void meterOn();
+void meterOff();
 void outletTwoOn();
 void outletTwoOff();
 void outletThreeOn();
@@ -47,9 +47,9 @@ UpnpBroadcastResponder upnpBroadcastResponder;
 
 Switch *solar = NULL;
 Switch *sick = NULL;
-Switch *lightThree = NULL;
-Switch *lightFour = NULL;
-Switch *outletOne = NULL;
+Switch *light = NULL;
+Switch *hardDrive = NULL;
+Switch *meter = NULL;
 Switch *outletTwo = NULL;
 Switch *outletThree = NULL;
 Switch *outletFour = NULL;
@@ -80,9 +80,9 @@ void setup()
     // Format: Alexa invocation name, local port no, on callback, off callback
     solar = new Switch("solar", 80, solarOn, solarOff);
     sick = new Switch("sick", 81, sickOn, sickOff);
-    lightThree = new Switch("light Three", 82, lightFourOn, lightFourOff);
-    lightFour = new Switch("Light Four", 83, lightFourOn, lightFourOff);
-    outletOne = new Switch("Outlet One", 84,outletOneOn, outletOneOff);
+    light = new Switch("light", 82, lightOn, lightOff);
+    hardDrive = new Switch("hard Drive", 83, hardDriveOn, hardDriveOff);
+    meter = new Switch("meter", 84,meterOn, meterOff);
     outletTwo = new Switch("Outlet Two", 85, outletTwoOn, outletTwoOff);
     outletThree = new Switch("Outlet Three", 86, outletThreeOn, outletThreeOff);
     outletFour = new Switch("Outlet Four", 87,outletFourOn, outletFourOff);
@@ -90,9 +90,9 @@ void setup()
     Serial.println("Adding switches upnp broadcast responder");
     upnpBroadcastResponder.addDevice(*solar);
     upnpBroadcastResponder.addDevice(*sick);
-    upnpBroadcastResponder.addDevice(*lightFour);
-    upnpBroadcastResponder.addDevice(*lightFour);
-    upnpBroadcastResponder.addDevice(*outletOne);
+    upnpBroadcastResponder.addDevice(*light);
+    upnpBroadcastResponder.addDevice(*hardDrive);
+    upnpBroadcastResponder.addDevice(*meter);
     upnpBroadcastResponder.addDevice(*outletTwo);
     upnpBroadcastResponder.addDevice(*outletThree);
     upnpBroadcastResponder.addDevice(*outletFour);
@@ -124,11 +124,11 @@ void loop()
 
       solar->serverLoop();
       sick->serverLoop();
-      lightFour->serverLoop();
-      lightFour->serverLoop();
-      outletOne->serverLoop();
+      hardDrive->serverLoop();
+      hardDrive->serverLoop();
+      meter->serverLoop();
       outletTwo->serverLoop();
-      outletThree->serverLoop();
+      //outletThree->serverLoop();
       outletFour->serverLoop();
    }
 }
@@ -145,6 +145,8 @@ void solarOn() {
 
 void sickOff() {
     Serial.print("Switch 2 turn off ...");
+    digitalWrite(relayTwo, LOW);
+    delay(2000);
     digitalWrite(relayTwo, HIGH);   // sets relayOne off
 }
 
@@ -153,36 +155,36 @@ void sickOn() {
   digitalWrite(relayTwo, LOW);   // sets relayOne on
 }
 
-void lightThreeOff() {
-    Serial.print("Switch 3 turn off ...");
-    digitalWrite(relayThree, LOW);   // sets relayOne on
+void lightOff() {
+    //Serial.print("Switch 3 turn off ...");
+    //digitalWrite(relayThree, LOW);   // sets relayOne on
 }
 
-void lightThreeOn() {
+void lightOn() {
   Serial.print("Switch 3 turn on ...");
   digitalWrite(relayThree, HIGH);   // sets relayOne on
 }
 
-void lightFourOff() {
+void hardDriveOff() {
     Serial.print("Switch4 turn off ...");
-    digitalWrite(relayFour, LOW);   // sets relayOne on
+    digitalWrite(relayFour, HIGH);   // sets relayOne on
 }
 
-void lightFourOn() {
+void hardDriveOn() {
   Serial.print("Switch 4 turn on ...");
-  digitalWrite(relayFour, HIGH);   // sets relayOne on
+  digitalWrite(relayFour, LOW);   // sets relayOne on
 }
 
 //sockets
 
-void outletOneOff() {
+void meterOff() {
     Serial.print("Socket 1 turn off ...");
-    digitalWrite(relayFive, LOW);   // sets relayOne on
+    digitalWrite(relayFive, HIGH);   // sets relayOne on
 }
 
-void outletOneOn() {
+void meterOn() {
     Serial.print("Socket 1turn on ...");
-    digitalWrite(relayFive, HIGH);   // sets relayOne off
+    digitalWrite(relayFive, LOW);   // sets relayOne off
 }
 
 void outletTwoOff() {
