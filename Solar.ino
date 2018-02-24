@@ -146,7 +146,7 @@ void solarOn() {
 void sickOff() {
     Serial.print("Switch 2 turn off ...");
     digitalWrite(relayTwo, LOW);
-    delay(2000);
+    delay(3000);
     digitalWrite(relayTwo, HIGH);   // sets relayOne off
 }
 
