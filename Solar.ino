@@ -106,14 +106,14 @@ void setup()
     pinMode (12, OUTPUT);
     pinMode (13, OUTPUT);
     pinMode (15, OUTPUT);
-    digitalWrite (5,HIGH);
-    digitalWrite (4,HIGH);
-    digitalWrite (0,HIGH);
-    digitalWrite (2,HIGH);
-    digitalWrite (14,HIGH);
-    digitalWrite (12,HIGH);
-    digitalWrite (13,HIGH);
-    digitalWrite (15,HIGH);
+    //digitalWrite (5,HIGH);
+    //digitalWrite (4,HIGH);
+    //digitalWrite (0,HIGH);
+    //digitalWrite (2,HIGH);
+    //digitalWrite (14,HIGH);
+    //digitalWrite (12,HIGH);
+    //digitalWrite (13,HIGH);
+    //digitalWrite (15,HIGH);
   }
 }
 
@@ -155,8 +155,8 @@ void sickOn() {
 }
 
 void lightOff() {
-    //Serial.print("Switch 3 turn off ...");
-    //digitalWrite(relayThree, LOW);   // sets relayOne on
+    Serial.print("Switch 3 turn off ...");
+    digitalWrite(relayThree, LOW);   // sets relayOne on
 }
 
 void lightOn() {
@@ -178,12 +178,12 @@ void hardDriveOn() {
 
 void meterOff() {
     Serial.print("Socket 1 turn off ...");
-    digitalWrite(relayFive, HIGH);   // sets relayOne on
+    digitalWrite(relayFive, LOW);   // sets relayOne on
 }
 
 void meterOn() {
     Serial.print("Socket 1turn on ...");
-    digitalWrite(relayFive, LOW);   // sets relayOne off
+    digitalWrite(relayFive, HIGH);   // sets relayOne off
 }
 
 void outletTwoOff() {
